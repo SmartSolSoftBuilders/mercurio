@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="CuentaCliente">
+    <typeAlias alias="cuentaCliente" type="mx.com.seguros.model.CuentaCliente"/>
+
+    <select id="obtenerCuentaClienteByNumNominaContratante" resultClass="cuentaCliente" parameterClass="string">
+        SELECT numNominaContratante, saldoCuenta, fechaCalculoSaldo
+        FROM CuentaCliente 
+        where numNominaContratante=#numNominaContratante#
+    </select>
+    
+    <update id="updateCuentaCliente" parameterClass="cuentaCliente">
+    	UPDATE CuentaCliente
+    	SET saldoCuenta = #saldoCuenta#
+    	, fechaCalculoSaldo = #fechaCalculoSaldo#
+    	WHERE
+    	numNominaContratante = #numNominaContratante#
+    </update>
+
+	<insert id="insert" parameterClass="cuentaCliente">
+		INSERT INTO CuentaCliente(numNominaContratante, saldoCuenta, fechaCalculoSaldo)
+                VALUES(#numNominaContratante#, #saldoCuenta#, #fechaCalculoSaldo#)
+	</insert>
+	
+</sqlMap>
